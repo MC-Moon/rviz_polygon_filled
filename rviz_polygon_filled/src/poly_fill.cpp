@@ -68,7 +68,10 @@ void PolygonFilledDisplay::processMessage(const geometry_msgs::PolygonStamped::C
     setStatus( rviz::StatusProperty::Error, "Topic", "Message contained invalid floating point values (nans or infs)" );
     return;
   }
-
+  if (msg->polygon.points.size()==0)
+  {
+    return;
+  }
   std::vector<p2t::Point*> polyline;
   for (const auto &point : msg->polygon.points)
   {
